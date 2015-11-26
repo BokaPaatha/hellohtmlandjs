@@ -2,18 +2,43 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
-<script src="go-debug.js"></script>
-</head>
-<body>
+<title>Org Chart</title>
+<script src="go.js"></script>
+<script>
+	function init() {
+		var $ = go.GraphObject.make;
+		var myDiagram = $(go.Diagram, "orgChartDiv", {
+			initialContentAlignment : go.Spot.Center, // center Diagram contents
+			"undoManager.isEnabled" : true
+		// enable Ctrl-Z to undo and Ctrl-Y to redo
+		});
 
-</body>
+		// This is the data container.
+		var myModel = $(go.Model);
+		myModel.nodeDataArray = [ {
+			key : "Alpha"
+		}, {
+			key : "Beta"
+		}, {
+			key : "Gamma"
+		} ];
+
+		// Now add this to our diagram. 
+		myDiagram.model = myModel;
+
+	}
+</script>
+</head>
+<body onload="init()">
+
 
 <!-- http://gojs.net/latest/learn/index.html -->
 
 <!-- The DIV for a Diagram needs an explicit size or else we will not see anything.
      In this case we also add a background color so we can see that area. -->
-<div id="myDiagramDiv"
+<div id="orgChartDiv"
 	style="width: 400px; height: 150px; background-color: #DAE4E4;"></div>
-	
+
+</body >
+
 </html>
