@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Handle files using HTML5</title>
+
+<!-- https://scotch.io/tutorials/use-the-html5-file-api-to-work-with-files-locally-in-the-browser
+
+File API @ 
+https://w3c.github.io/FileAPI/
+
+1. Done. Open a single file. 
+https://www.nczonline.net/blog/2012/05/08/working-with-files-in-javascript-part-1/
+
+2. Done. Support drag and drop of files. Multiple. 
+https://www.nczonline.net/blog/2012/05/08/working-with-files-in-javascript-part-1/
+
+3. Read text files. Done.   
+http://blog.teamtreehouse.com/reading-files-using-the-html5-filereader-api
+
+Read a csv and turn it into json. 
+http://techslides.com/convert-csv-to-json-in-javascript
+
+Read a XLS and turn it into json. 
+Use json with gojs to create the org chart. 
+
+Export back stuff into XLS.
+ -->
+</head>
+<body>
+
+	<!-- This is a new one. You could ask for a file input and it will popup the file selector.  -->
+	<input id="the-file-input" type="file" />
+	<br />
+	<br />
+	<h1>Drag and drop some files here.</h1>
+	<!-- Or you could just have a old div.  -->
+	<div id="drag-and-drop-files"
+		style="background-color: green; width: 200px; height: 200px">
+		Drag and drop files here.</div>
+
+	<h1>Text of the file.</h1>
+	<div id="display-file-text"></div>
+	<h1>JSON representation of the content</h1>
+	<div id="display-file-json"></div>
+	<script>
+		var control = document.getElementById("the-file-input");
+		control.addEventListener("change", function(event) {
+
+			// When the control has changed, there are new files
+
+			var i = 0, files = control.files, len = files.length;
+
+			for (; i < len; i++) {
+				console.log("Filename: " + files[i].name);
+				console.log("Type: " + files[i].type);
+				console.log("Size: " + files[i].size + " bytes");
+			}
+
+		}, false);
+
+		var target = document.getElementById("drag-and-drop-files");
+
+		/* Prevent the default behaviour, which is showing the files that are dropped.  */
+		target.addEventListener("dragover", function(event) {
+			event.preventDefault();
+		}, false);
+
+		target.addEventListener("drop", function(event) {
+
+			// cancel default actions
+			event.preventDefault();
+
+			var i = 0, files = event.dataTransfer.files, len = files.length;
+
+			for (; i < len; i++) {
+				console.log("Filename: " + files[i].name);
+				console.log("Type: " + files[i].type);
+				console.log("Size: " + files[i].size + " bytes");
+			}
+
+			var fileDisplayArea = document.getElementById("display-file-text");
+			var jsonDisplayArea = document.getElementById("display-file-json");
+			var file = files[0];
+			
+			
+			var reader = new FileReader();
+			reader.onload = function(e) {
+				fileDisplayArea.innerText = reader.result;
+				jsonDisplayArea.innerText = csvJSON(reader.result);
+			}
+			reader.readAsText(file);
+
+		}, false);
+
+		// Convert CSV to JSON. 
+		function csvJSON(csv) {
+			var lines = csv.split("\n");
+			var result = [];
+			var headers = lines[0].split(",");
+			for (var i = 1; i < lines.length; i++) {
+				var obj = {};
+				var currentline = lines[i].split(",");
+				for (var j = 0; j < headers.length; j++) {
+					obj[headers[j]] = currentline[j];
+				}
+				result.push(obj);
+			}
+			//return result; //JavaScript object
+			return JSON.stringify(result); //JSON
+		}
+	</script>
+
+
+</body>
+
+
+
+</html>
