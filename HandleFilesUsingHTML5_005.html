@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Handle files using HTML5</title>
+
+<!-- https://scotch.io/tutorials/use-the-html5-file-api-to-work-with-files-locally-in-the-browser -->
+
+<!-- File API @ 
+https://w3c.github.io/FileAPI/ -->
+
+<!-- Working with files in JavaScript, Part 1: The Basics -->
+<!-- https://www.nczonline.net/blog/2012/05/08/working-with-files-in-javascript-part-1/ -->
+
+
+</head>
+<body>
+
+    <!-- This is a new one. You could ask for a file input and it will popup the file selector.  -->
+    <input id="the-file-input" type="file" />
+    
+    <!-- Or you could just have a old div.  -->
+    <div id="drag-and-drop-files" style="background-color:green; width:100px; height:100px"> Drag and drop files here. </div> 
+</body>
+
+
+<script>
+    var control = document.getElementById("the-file-input");
+    control.addEventListener("change", function(event) {
+
+        // When the control has changed, there are new files
+
+        var i = 0, files = control.files, len = files.length;
+
+        for (; i < len; i++) {
+            console.log("Filename: " + files[i].name);
+            console.log("Type: " + files[i].type);
+            console.log("Size: " + files[i].size + " bytes");
+        }
+
+    }, false);
+    
+    var target = document.getElementById("drag-and-drop-files");
+    
+    
+/* Prevent the default behaviour, which is showing the files that are dropped.  */    
+    target.addEventListener("dragover", function(event) {
+        event.preventDefault();
+    }, false);
+
+    target.addEventListener("drop", function(event) {
+
+        // cancel default actions
+        event.preventDefault();
+
+        var i = 0,
+            files = event.dataTransfer.files,
+            len = files.length;
+
+        for (; i < len; i++) {
+            console.log("Filename: " + files[i].name);
+            console.log("Type: " + files[i].type);
+            console.log("Size: " + files[i].size + " bytes");
+        }
+
+    }, false);
+    
+</script>
+
+</html>
