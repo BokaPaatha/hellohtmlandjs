@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Handle files using HTML5</title>
+
+<!-- https://scotch.io/tutorials/use-the-html5-file-api-to-work-with-files-locally-in-the-browser -->
+
+<!-- File API @ 
+https://w3c.github.io/FileAPI/ -->
+
+<!-- Working with files in JavaScript, Part 1: The Basics -->
+<!-- https://www.nczonline.net/blog/2012/05/08/working-with-files-in-javascript-part-1/ -->
+
+
+</head>
+<body>
+
+	<!-- This is a new one. You could ask for a file input and it will popup the file selector.  -->
+	<input id="the-file-input" type="file" />
+</body>
+
+
+<script>
+	var control = document.getElementById("the-file-input");
+	control.addEventListener("change", function(event) {
+
+		// When the control has changed, there are new files
+
+		var i = 0, files = control.files, len = files.length;
+
+		for (; i < len; i++) {
+			console.log("Filename: " + files[i].name);
+			console.log("Type: " + files[i].type);
+			console.log("Size: " + files[i].size + " bytes");
+		}
+
+	}, false);
+</script>
+
+</html>
