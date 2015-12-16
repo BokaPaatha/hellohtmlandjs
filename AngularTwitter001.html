@@ -1,0 +1,77 @@
+<!-- 
+http://www.w3schools.com/angular/angular_bootstrap.asp
+https://www.bootstrapcdn.com
+https://developers.google.com/speed/libraries/
+
+Add maxcdn link at the head of the HTML.
+
+ -->
+
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+<script
+	src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+
+<script id="code">
+	var myApp = angular.module('myApp', []);
+	myApp.controller('myCntrl', function($scope) {
+		$scope.users = [ {
+			id : 1,
+			fName : 'Hege',
+			lName : "Pege"
+		}, {
+			id : 2,
+			fName : 'Kim',
+			lName : "Pim"
+		}, {
+			id : 3,
+			fName : 'Sal',
+			lName : "Smith"
+		}, {
+			id : 4,
+			fName : 'Jack',
+			lName : "Jones"
+		}, {
+			id : 5,
+			fName : 'John',
+			lName : "Doe"
+		}, {
+			id : 6,
+			fName : 'Peter',
+			lName : "Pan"
+		} ];
+	});
+</script>
+
+</head>
+<body ng-app="myApp" ng-controller="myCntrl">
+
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th>Edit</th>
+				<th>First Name</th>
+				<th>Last Name</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="user in users">
+				<td>
+					<button class="btn" ng-click="editUser(user.id)">
+						<span class="glyphicon glyphicon-pencil"></span>&nbsp;&nbsp;Edit
+					</button>
+				</td>
+				<td>{{ user.fName }}</td>
+				<td>{{ user.lName }}</td>
+			</tr>
+		</tbody>
+	</table>
+
+</body>
+</html>

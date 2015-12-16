@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html ng-app>
+<html ng-app="">
 <head>
 <meta charset="UTF-8">
 <title>AngularJs</title>
@@ -20,4 +20,49 @@
 <!-- AngularJs 
 
 Home page
-https://angularjs.org -->
+https://angularjs.org 
+http://www.w3schools.com/angular/
+
+
+The ng-app directive tells AngularJS that the <div> element is the "owner" of an AngularJS application.
+	<html ng-app>
+	<div ng-app="">
+	<div ng-app="" ng-init="firstName='John'">
+	<div data-ng-app="" data-ng-init="firstName='John'">	
+	<div ng-app="" ng-init="firstName='John';lastName='Doe'">
+	<div ng-app="" ng-init="person={firstName:'John',lastName:'Doe'}">
+	<div ng-app="" ng-init="points=[1,15,19,2,40]">
+
+The ng-model directive binds the value of HTML controls (input, select, textarea) to application data.
+
+
+AngularJS expressions are written inside double braces: {{ expression }}.
+	<p>My first expression: {{ 5 + 5 }}</p>
+	<h1>Hello {{yourName}}!</h1>
+	AngularJS expressions do not support conditionals, loops, and exceptions, while JavaScript expressions do.
+
+
+The ng-bind directive binds application data to the HTML view.
+
+AngularJS modules define AngularJS applications.
+An AngularJS module defines an application.
+The module is a container for the application controllers.
+	Example 1 
+		var app = angular.module('myApp', []);
+		app.controller('myCtrl', ... ) ; 
+		<div ng-app="myApp" ng-controller="myCtrl">
+
+Directive : ng-app 
+The ng-app directive defines the root element of an AngularJS application.
+The ng-app directive will auto-bootstrap (automatically initialize) the application when a web page is loaded.
+
+<div ng-app="" ng-init="names=['Jani','Hege','Kai']">
+  <ul>
+    <li ng-repeat="x in names">
+      {{ x }}
+    </li>
+  </ul>
+</div>
+
+
+-->
